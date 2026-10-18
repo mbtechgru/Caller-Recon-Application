@@ -1,0 +1,20 @@
+[Unit]
+Description=CallerRecon investigation dashboard
+After=network.target
+[Service]
+Type=simple
+User=callerrecon
+Group=callerrecon
+WorkingDirectory=/opt/callerrecon/app
+EnvironmentFile=/etc/callerrecon/app.env
+ExecStart=/opt/callerrecon/venv/bin/gunicorn --workers 2 --threads 2 --timeout 90 --bind 127.0.0.1:5050 app:app
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/callerrecon/app
+[Install]
+WantedBy=multi-user.target

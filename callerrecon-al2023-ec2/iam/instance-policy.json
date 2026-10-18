@@ -1,0 +1,8 @@
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {"Sid":"ListBackupPrefix","Effect":"Allow","Action":["s3:ListBucket"],"Resource":"arn:aws:s3:::REPLACE_BUCKET","Condition":{"StringLike":{"s3:prefix":["callerrecon/*"]}}},
+    {"Sid":"WriteBackups","Effect":"Allow","Action":["s3:PutObject"],"Resource":"arn:aws:s3:::REPLACE_BUCKET/callerrecon/*"},
+    {"Sid":"EncryptBackups","Effect":"Allow","Action":["kms:GenerateDataKey","kms:Decrypt"],"Resource":"REPLACE_KMS_KEY_ARN"}
+  ]
+}
